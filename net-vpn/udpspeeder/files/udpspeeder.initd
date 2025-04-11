@@ -1,0 +1,40 @@
+#!/sbin/openrc-run
+
+name="udpspeeder"
+description="Network quality improvement tunnel"
+
+depend() {
+	need net
+}
+
+checkconfig() {
+	if [ "${SVCNAME}" = "${CONF}" ]; then
+		eerror "You are not supposed to run this script directly. Create a symlink"
+		eerror "for the configuration you want to run:"
+		eerror
+		eerror "  ln -s ${name} /etc/init.d/${name}.tunnel"
+		eerror "  cp /etc/conf.d/${name} /etc/conf.d/${name}.tunnel"
+		eerror
+		eerror "And then call it instead."
+		return 1
+	fi
+	return 0
+}
+
+start_pre() {
+	if [ "${RC_CMD}" != "restart" ] ; then
+		checkconfig || return $?
+	fi
+}
+
+CONF="${SVCNAME#*.}"
+
+command="/usr/bin/speederv2"
+
+command_user="${UDPSPEEDER_USER}:${UDPSPEEDER_GROUP}"
+
+command_args="${UDPSPEEDER_OPTIONS}"
+
+pidfile="/run/${SVCNAME}-${CONF}.pid"
+
+command_background="yes"

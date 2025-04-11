@@ -1,0 +1,7 @@
+# /etc/conf.d/udpspeeder: config file for /etc/init.d/udpspeeder
+
+# DO NOT MODIFY THIS FILE DIRECTLY! CREATE A COPY AND MODIFY THAT INSTEAD!
+
+UDPSPEEDER_OPTIONS=""
+UDPSPEEDER_USER="nobody"
+UDPSPEEDER_GROUP="nobody"
