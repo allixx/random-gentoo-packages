@@ -35,6 +35,6 @@ command_user="${UDPSPEEDER_USER}:${UDPSPEEDER_GROUP}"
 
 command_args="${UDPSPEEDER_OPTIONS}"
 
-pidfile="/run/${SVCNAME}-${CONF}.pid"
+pidfile="/run/${SVCNAME}.pid"
 
 command_background="yes"
